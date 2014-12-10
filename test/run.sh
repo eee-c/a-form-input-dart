@@ -10,6 +10,17 @@ fi
 echo "Looks good!"
 echo
 
+# Install content_shell if not already present
+which content_shell
+if [[ $? -ne 0 ]]; then
+  $DART_SDK/../chromium/download_contentshell.sh
+  unzip content_shell-linux-x64-release.zip
+
+  cs_path=$(ls -d drt-*)
+  PATH=$cs_path:$PATH
+fi
+
+# Start pub serve
 pub serve &
 pub_pid=$!
 
@@ -22,9 +33,8 @@ echo -e "$results"
 
 kill $pub_pid
 
-
 # check to see if DumpRenderTree tests
-# fails, since it always returns 0
+# failed, since it always returns 0
 if [[ "$results" == *"Some tests failed"* ]]
 then
     exit 1
