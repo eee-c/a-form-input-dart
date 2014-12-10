@@ -1,0 +1,11 @@
+name: a-form-input
+author: "Chris Strom <github@eeecomputes.com>"
+description: "Polymer element that mimics a native <form> input."
+dependencies:
+  polymer: any
+dev_dependencies:
+  unittest: any
+transformers:
+- polymer:
+    entry_points:
+      - test/index.html
